@@ -1,101 +1,216 @@
-body {
-    font-family: sans-serif;
+
+:root {
+    --background-color: #121212;
+    --text-color: #FFFFFF;
+    --primary-accent-color: #00FFFF;
+    --secondary-accent-color: #FF00FF;
+    --card-background-color: rgba(30, 30, 30, 0.7);
+    --card-border-color: rgba(255, 255, 255, 0.2);
+    --font-family-heading: 'Montserrat', sans-serif;
+    --font-family-body: 'Open Sans', sans-serif;
+}
+
+* {
     margin: 0;
-    background-color: #f0f0f0;
-    background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239C92AC' fill-opacity='0.1'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H0V5z'/%3E%3C/g%3E%3C/svg%3E");
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: var(--font-family-body);
+    line-height: 1.6;
+    overflow-x: hidden;
+    background-image: linear-gradient(45deg, rgba(0, 255, 255, 0.05), rgba(255, 0, 255, 0.05));
 }
 
 header {
-    background-color: #333;
-    color: white;
-    padding: 1rem;
     text-align: center;
+    padding: 2rem 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    background-color: rgba(18, 18, 18, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--card-border-color);
+    z-index: 1000;
 }
 
-nav ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
+header h1 {
+    font-family: var(--font-family-heading);
+    font-size: 3rem;
+    color: var(--primary-accent-color);
+    text-shadow: 0 0 10px var(--primary-accent-color), 0 0 20px var(--primary-accent-color);
 }
 
-nav li {
-    display: inline-block;
-    margin: 0 1rem;
-}
-
-nav a {
-    color: white;
-    text-decoration: none;
-}
-
-main {
-    padding: 2rem;
-    padding-bottom: 6rem; /* Add padding to avoid overlap with footer */
-}
-
-#hero {
-    text-align: center;
-    padding: 4rem 0;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    margin-bottom: 2rem;
-}
-
-#tutorials article {
-    background-color: #fff;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    margin-bottom: 2rem;
-}
-
-.container {
-  container-type: inline-size;
-  width: 100%;
-  border: 1px solid #ccc;
-  resize: horizontal;
-  overflow: auto;
-  padding: 1rem;
-}
-
-.item {
-  background-color: #f9f9f9;
-  padding: 1rem;
-  border-radius: 8px;
-}
-
-@container (min-width: 200px) {
-  .item {
-    background-color: #e0f7fa;
-  }
-}
-
-.card-container {
-  display: flex;
-  gap: 1rem;
-  margin-top: 1rem;
+#content-stream {
+    padding-top: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+    padding-bottom: 2.5rem;
 }
 
 .card {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 1rem;
-  flex: 1;
+    width: 90%;
+    max-width: 600px;
+    background-color: var(--card-background-color);
+    border: 1px solid var(--card-border-color);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 255, 255, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column; /* Changed to column */
+    justify-content: space-between; /* Changed to space-between */
+    background-size: cover;
+    background-position: center;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
 }
 
-.card:has(.featured) {
-  background: #e0f7fa;
-  border-color: #00bcd4;
-}
-
-
-footer {
-    background-color: #333;
-    color: white;
+.card-content {
+    padding: 2rem;
     text-align: center;
+    flex-grow: 1; /* Allow content to grow */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.card-text {
+    font-size: 1.6rem;
+    font-family: var(--font-family-heading);
+    color: var(--text-color);
+    text-shadow: 0 0 8px rgba(0,0,0,0.8);
+}
+
+.card-footer {
+    display: flex;
+    justify-content: flex-end;
     padding: 1rem;
-    position: fixed;
-    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.card-footer button {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-left: 1rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.card-footer button:hover {
+    color: var(--primary-accent-color);
+    transform: scale(1.1);
+}
+
+.like-btn.liked {
+    color: var(--secondary-accent-color);
+}
+
+/* Poll Card */
+.poll-options {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.poll-option {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--card-border-color);
+    padding: 0.75rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.poll-option:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.poll-option .percentage-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: var(--primary-accent-color);
+    opacity: 0.5;
+    width: 0;
+    transition: width 0.5s ease;
+}
+
+.poll-option .option-text {
+    position: relative;
+    z-index: 1;
+}
+
+/* Fact Card (Flip Animation) */
+.fact-card {
+    perspective: 1000px;
+}
+
+.card-inner {
+    position: relative;
     width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    cursor: pointer;
+    flex-grow: 1; /* Make inner fill the card */
+}
+
+.fact-card.is-flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.card-back {
+    transform: rotateY(180deg);
+    background-color: var(--card-background-color); /* Same as card */
+}
+
+/* Quote Card */
+.quote-card blockquote {
+    font-style: italic;
+}
+
+.quote-card cite {
+    display: block;
+    margin-top: 1rem;
+    font-size: 1rem;
+    color: var(--primary-accent-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2.5rem;
+    }
+
+    .card-text {
+        font-size: 1.3rem;
+    }
 }
